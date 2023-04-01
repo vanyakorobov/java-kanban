@@ -1,26 +1,24 @@
 package Core;
 
 import Storage.Epic;
-import Storage.Subtask;
+import Storage.Status;
+import Storage.SubTask;
 import Storage.Task;
 
 public class Main {
 
     public static void main(String[] args) {
-        Task task = new Task("Задача", "задач", 1, new String[] {"NEW"});
-        Task task1 = new Task("Задача1", "задач1", 2, new String[] {"NEW"});
-        Epic epic = new Epic("Эпик1", "Описание эпика 1", 1, new String[] {"DONE"});
-        Subtask subtask = new Subtask("Подзадача1", "Подзадача", 1, new String[] {"NEW"});
-        Subtask subtask1 = new Subtask("Подзадача2", "Подзадача", 2, new String[] {"DONE"});
+
         Manager manager = new Manager();
-        manager.createTask(task);
-        manager.createTask(task1);
-        manager.printAllTasks();
-        manager.createEpic(epic);
-        manager.createSubtask(subtask);
-        manager.createSubtask(subtask1);
-        manager.updateSubtask(subtask);
-        System.out.println(epic);
+        Epic epic1 = new Epic("Эпик первый", "Описание этого эпика", 1);
+        SubTask subTask = new SubTask("Подзадача первая", "Описание этой подзадачи", 1);
+        manager.createEpic(epic1);
+        manager.printAllEpic();
+        System.out.println(epic1);
+        manager.createSubTask(subTask);
+        subTask.setStatus(Status.IN_PROGRESS);
+        manager.setEpicStatus(1);
+        System.out.println("Статус эпика 1 - " + manager.setEpicStatus(1));
     }
 
 }

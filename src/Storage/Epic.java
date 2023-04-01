@@ -2,21 +2,27 @@ package Storage;
 
 import java.util.ArrayList;
 
-public class Epic extends Task {
 
-    protected ArrayList<String> subTaskStatus = new ArrayList<>();
-    public Epic(String title, String description, int id, String[] status) {
-        super(title, description, id, status);
+public class Epic extends Task {
+    protected ArrayList<Integer> subTaskId = new ArrayList<>();
+    protected  String status;
+    public Epic(String title, String description, int id) {
+
+        super(title, description, id);
     }
 
-    public ArrayList<String> getSubtaskStatus() {
-        return subTaskStatus;
+    public ArrayList<Integer> getSubTaskId() {
+
+        return subTaskId;
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "subtaskStatus=" + subTaskStatus +
+                "subTaskId=" + subTaskId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", id=" + id +
                 '}';
     }
 }
