@@ -4,6 +4,7 @@ import Enum.Status;
 import Storage.Task;
 import Storage.Epic;
 import Storage.SubTask;
+
 import java.util.HashMap;
 
 
@@ -18,19 +19,21 @@ public class Manager {
 
     // набор методов для Task
 
-    public int createTask(Task task) {  // как настроить id, как указывать статус, как связать эпик и сабтаск
+    public int createTask(Task task) {
         task.setId(newTaskId++);
         taskMap.put(task.getId(), task);
 
         return task.getId();
     }
 
-    public void printAllTasks() {
 
-        taskMap.toString();
+    public String printAllTasks() {
+
+        return taskMap.toString();
     }
 
-    public void updateTask(Task task) {
+    public void updateTask(int id, Task task) {
+        task.setId(id);
         taskMap.put(task.getId(), task);
     }
 
@@ -38,8 +41,8 @@ public class Manager {
         taskMap.clear();
     }
 
-    public void removeTask(Task task) {
-        taskMap.remove(task.getId());
+    public Task removeTask(int id) {
+        return taskMap.remove(id);
 
     }
 
@@ -58,13 +61,6 @@ public class Manager {
         return subTask.getId();
     }
 
-    public void addSubTaskToEpic(int epicId, int subTaskId) {
-        Epic epic = epicMap.get(epicId);
-        if (epic != null) {
-            epic.getSubTaskId().add(subTaskId);
-            subTaskMap.get(subTaskId).setEpicId(epicId);
-        }
-    }
 
     public void printAllSubTasks() {
 
@@ -105,9 +101,9 @@ public class Manager {
 
     public Status updateEpic(Epic epic, int epicId) {
         epicMap.put(epic.getId(), epic);
-         epic = epicMap.get(epicId);
-        if (epic == null) {
-            return Status.NEW; // если эпик пустой вернуть статус new
+        epic = epicMap.get(epicId);
+            if (epic == null) {
+                return Status.NEW; // если эпик пустой вернуть статус new
         }
 
         boolean allDone = true;
@@ -124,12 +120,12 @@ public class Manager {
             }
         }
 
-        if (allDone) {
+            if (allDone) {
             return Status.DONE; // все сабтаски выполнены, статус эпика done
-        } else if (anyInProgress) {
-            return Status.IN_PROGRESS; // хотя бы один сабтаск в прогрессе, статус эпика ин прогресс
-        } else {
-            return Status.NEW; // еще есть невыполненные сабтаски, статус эпика new
+            } else if (anyInProgress) {
+            return Status.IN_PROGRESS; // хотя бы один сабтаск в прогрессе, статус эпика ин прогрес
+            } else {
+                return Status.NEW; // еще есть невыполненные сабтаски, статус эпика new
         }
     }
 
@@ -150,7 +146,7 @@ public class Manager {
     }
 
     public Task getSubEpicId(int id) {
-        return epicMap.get(id);
+                return epicMap.get(id);
     }
 
 

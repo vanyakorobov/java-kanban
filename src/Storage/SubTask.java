@@ -6,6 +6,11 @@ public class SubTask extends Task {
     Status status;
     protected int id;
 
+    public SubTask(String title, String description, Status status) {
+        super(title, description, status);
+        this.status = status;
+    }
+
     @Override
     public int getId() {
         return id;
@@ -24,10 +29,6 @@ public class SubTask extends Task {
         this.epicId = epicId;
     }
 
-    public SubTask(String title, String description, Status status) {
-        super(title, description, status);
-        this.status = status;
-    }
 
     public int getEpicId() {
         return epicId;

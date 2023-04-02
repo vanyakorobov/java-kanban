@@ -19,14 +19,16 @@ public class Main {
         SubTask subTask4 = new SubTask("Подзадача 4", "описание подзадачи 4", Status.DONE);
         SubTask subTask5 = new SubTask("Подзадача 5", "описание подзадачи 5", Status.IN_PROGRESS);
         manager.createEpic(epic);
+        manager.createTask(task);
         manager.createSubTask(subTask);
-        manager.createTask(subTask1);
+        manager.createSubTask(subTask1);
         manager.createSubTask(subTask2);
         manager.createSubTask(subTask3);
         manager.createSubTask(subTask4);
         manager.createSubTask(subTask5);
-        manager.addSubTaskToEpic(1, 2);
         manager.updateEpic(epic, 1);
+        System.out.println(epic);
+        System.out.println(task);
         System.out.println(subTask);
         System.out.println(subTask1);
         System.out.println(subTask2);
