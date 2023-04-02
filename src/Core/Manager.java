@@ -1,6 +1,6 @@
 package Core;
 
-import Storage.Status;
+import Enum.Status;
 import Storage.Task;
 import Storage.Epic;
 import Storage.SubTask;
@@ -18,7 +18,7 @@ public class Manager {
 
     // набор методов для Task
 
-    public int createTask(Task task) {
+    public int createTask(Task task) {  // как настроить id, как указывать статус, как связать эпик и сабтаск
         task.setId(newTaskId++);
         taskMap.put(task.getId(), task);
 
@@ -58,6 +58,14 @@ public class Manager {
         return subTask.getId();
     }
 
+    public void addSubTaskToEpic(int epicId, int subTaskId) {
+        Epic epic = epicMap.get(epicId);
+        if (epic != null) {
+            epic.getSubTaskId().add(subTaskId);
+            subTaskMap.get(subTaskId).setEpicId(epicId);
+        }
+    }
+
     public void printAllSubTasks() {
 
         subTaskMap.toString();
@@ -82,13 +90,7 @@ public class Manager {
 
 
 
-    public void updateSubTaskStatus(int subTaskId, Status newStatus) {
-        SubTask subTask = subTaskMap.get(subTaskId); // получаем сабтаск по id
-        if (subTask != null) {
-            subTask.setStatus(newStatus); // обновляем статус сабтаскаа
-            subTaskMap.put(subTaskId, subTask); // обновляем информацию
-        }
-    }
+
 
 
 
@@ -96,14 +98,14 @@ public class Manager {
 //набор методов для Epic
     public int createEpic(Epic epic) {
         epic.setId(newEpicId++);
-
         epicMap.put(epic.getId(), epic);
 
         return epic.getId();
     }
 
-    public Status setEpicStatus(int epicId) {
-        Epic epic = epicMap.get(epicId);
+    public Status updateEpic(Epic epic, int epicId) {
+        epicMap.put(epic.getId(), epic);
+         epic = epicMap.get(epicId);
         if (epic == null) {
             return Status.NEW; // если эпик пустой вернуть статус new
         }
@@ -136,9 +138,7 @@ public class Manager {
         epicMap.toString();
     }
 
-    public void updateEpic(Epic epic) {
-        epicMap.put(epic.getId(), epic);
-    }
+
 
     public void clearEpic() {
         epicMap.clear();

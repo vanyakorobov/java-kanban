@@ -1,4 +1,4 @@
-package Storage;
+package Enum;
 
 public enum Status {
 

@@ -1,19 +1,19 @@
 package Storage;
+import Enum.Status;
 
-
-public class Task { // Суперкласс
+public class Task {
     protected String title;
     protected String description;
     protected int id;
+    protected Status status;
 
 
-
-    public Task(String title, String description, int id) {
+    public Task(String title, String description, Status status) {
         this.title = title;
         this.description = description;
-        this.id = id;
-
+        this.status = status;
     }
+
 
     public String getTitle() {
         return title;
@@ -37,6 +37,7 @@ public class Task { // Суперкласс
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
+                ", Status=" + status +
                 '}';
     }
 }
