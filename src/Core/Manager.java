@@ -148,22 +148,4 @@ public class Manager {
     public Task getSubEpicId(int id) {
                 return epicMap.get(id);
     }
-
-
-  /*  public void updateSubTask(SubTask subTask) {
-        subTaskMap.put(subTask.getId(), subTask);
-
-        int idSubTask = subTask.getEpicId();
-        Epic epic = epicMap.get(idSubTask);
-
-        String newStatus = null;
-        for (Integer subId : epic.getSubTaskId()) {
-            SubTask anySub = subTaskMap.get(subId);
-           newStatus = anySub.getStatus();
-        }
-        epic.setStatus(newStatus);
-
-    }
-
-   */
 }
