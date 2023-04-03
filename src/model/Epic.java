@@ -1,26 +1,14 @@
-package Storage;
+package model;
 import Enum.Status;
 import java.util.ArrayList;
 
 
 public class Epic extends Task {
     protected ArrayList<Integer> subTaskId = new ArrayList<>();
-    protected int id;
-
 
     public Epic(String title, String description, Status status) {
         super(title, description, status);
         this.subTaskId = subTaskId;
-    }
-
-    @Override
-    public int getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(int id) {
-        this.id = id;
     }
 
     public void setStatus(Status status) {

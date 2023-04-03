@@ -1,107 +1,89 @@
-package Core;
+package core;
 
 import Enum.Status;
-import Storage.Task;
-import Storage.Epic;
-import Storage.SubTask;
-
+import model.Task;
+import model.Epic;
+import model.SubTask;
+import java.util.ArrayList;
 import java.util.HashMap;
-
 
 public class Manager {
     private int newTaskId = 1;
     private int newEpicId = 1;
     private int newSubTaskId = 1;
 
-    HashMap<Integer, Task> taskMap = new HashMap<>();
-    HashMap<Integer, SubTask> subTaskMap = new HashMap<>();
-    HashMap<Integer, Epic> epicMap = new HashMap<>();
+    HashMap<Integer, Task> tasks = new HashMap<>();
+    HashMap<Integer, SubTask> subTasks = new HashMap<>();
+    HashMap<Integer, Epic> epics = new HashMap<>();
 
     // набор методов для Task
-
     public int createTask(Task task) {
         task.setId(newTaskId++);
-        taskMap.put(task.getId(), task);
+        tasks.put(task.getId(), task);
 
         return task.getId();
     }
 
-
-    public String printAllTasks() {
-
-        return taskMap.toString();
+    public ArrayList<Task> getTasks(){
+        return new ArrayList<>(tasks.values());
     }
 
-    public void updateTask(int id, Task task) {
-        task.setId(id);
-        taskMap.put(task.getId(), task);
+    public void updateTask(Task task) {
+        tasks.put(task.getId(), task);
     }
 
     public void clearTasks() {
-        taskMap.clear();
+        tasks.clear();
     }
 
     public Task removeTask(int id) {
-        return taskMap.remove(id);
+        return tasks.remove(id);
 
     }
 
     public Task getTaskId(int id) {
-        return taskMap.get(id);
+        return tasks.get(id);
     }
-
-
-
 
     //набор методов для SubTask
     public int createSubTask(SubTask subTask) {
         subTask.setId(newSubTaskId++);
-        subTaskMap.put(subTask.getId(), subTask);
+        subTasks.put(subTask.getId(), subTask);
 
         return subTask.getId();
     }
 
-
-    public void printAllSubTasks() {
-
-        subTaskMap.toString();
+    public ArrayList<SubTask> getSubtaskTasks(){
+        return new ArrayList<>(subTasks.values());
     }
 
     public void updateSubTask(SubTask subTask) {
-        subTaskMap.put(subTask.getId(), subTask);
+        subTasks.put(subTask.getId(), subTask);
     }
 
     public void clearSubTasks() {
-        subTaskMap.clear();
+        subTasks.clear();
     }
 
     public void removeSubTask(SubTask subTask) {
-        subTaskMap.remove(subTask.getId());
-
+        subTasks.remove(subTask.getId());
     }
 
     public Task getSubTaskId(int id) {
-        return subTaskMap.get(id);
+        return subTasks.get(id);
     }
-
-
-
-
-
-
-
 
 //набор методов для Epic
     public int createEpic(Epic epic) {
         epic.setId(newEpicId++);
-        epicMap.put(epic.getId(), epic);
+        epics.put(epic.getId(), epic);
 
         return epic.getId();
     }
 
     public Status updateEpic(Epic epic, int epicId) {
-        epicMap.put(epic.getId(), epic);
-        epic = epicMap.get(epicId);
+        epics.put(epic.getId(), epic);
+        epic = epics.get(epicId);
             if (epic == null) {
                 return Status.NEW; // если эпик пустой вернуть статус new
         }
@@ -110,7 +92,7 @@ public class Manager {
         boolean anyInProgress = false;
 
         for (int subTaskId : epic.getSubTaskId()) {
-            SubTask subTask = subTaskMap.get(subTaskId); // получаем сабтаск по id
+            SubTask subTask = subTasks.get(subTaskId); // получаем сабтаск по id
             if (subTask != null && subTask.getStatus() == Status.IN_PROGRESS) {
                 anyInProgress = true; // если хотя бы один сабтаск ин прогресс, то статус эпика будет ин прогресс
                 allDone = false;
@@ -129,23 +111,20 @@ public class Manager {
         }
     }
 
-    public void printAllEpic() {
-
-        epicMap.toString();
+    public ArrayList<Epic> getEpic(){
+        return new ArrayList<>(epics.values());
     }
 
-
-
     public void clearEpic() {
-        epicMap.clear();
+        epics.clear();
     }
 
     public void removeEpic(Epic epic) {
-        epicMap.remove(epic.getId());
+        epics.remove(epic.getId());
 
     }
 
     public Task getSubEpicId(int id) {
-                return epicMap.get(id);
+                return epics.get(id);
     }
 }

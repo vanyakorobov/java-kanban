@@ -1,19 +1,13 @@
-package Storage;
+package model;
 import Enum.Status;
 
 public class SubTask extends Task {
-    protected int epicId;
-    Status status;
+    private int epicId;
     protected int id;
 
     public SubTask(String title, String description, Status status) {
         super(title, description, status);
         this.status = status;
-    }
-
-    @Override
-    public int getId() {
-        return id;
     }
 
     public Status getStatus() {
@@ -29,12 +23,9 @@ public class SubTask extends Task {
         this.epicId = epicId;
     }
 
-
     public int getEpicId() {
         return epicId;
     }
-
-
 
     @Override
     public String toString() {

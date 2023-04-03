@@ -1,10 +1,10 @@
-package Core;
-
-import Storage.Epic;
+import core.Manager;
+import model.Epic;
 import Enum.Status;
-import Storage.SubTask;
-import Storage.Task;
+import model.SubTask;
+import model.Task;
 
+// ПАКЕТ ENUM НЕ ПЕРЕИМЕНОВЫВАЕТСЯ - написано "enum is not an identifier"
 public class Main {
 
     public static void main(String[] args) {
