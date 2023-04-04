@@ -1,13 +1,13 @@
 package core;
 
-import Enum.Status;
+import model.Status;
 import model.Task;
 import model.Epic;
 import model.SubTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Manager {
+public class TaskManager {
     private int newTaskId = 1;
     private int newEpicId = 1;
     private int newSubTaskId = 1;
@@ -111,11 +111,11 @@ public class Manager {
         }
     }
 
-    public ArrayList<Epic> getEpic(){
+    public ArrayList<Epic> getEpics(){
         return new ArrayList<>(epics.values());
     }
 
-    public void clearEpic() {
+    public void clearEpics() {
         epics.clear();
     }
 

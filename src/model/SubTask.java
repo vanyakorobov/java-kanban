@@ -1,9 +1,7 @@
 package model;
-import Enum.Status;
 
 public class SubTask extends Task {
     private int epicId;
-    protected int id;
 
     public SubTask(String title, String description, Status status) {
         super(title, description, status);
@@ -14,10 +12,7 @@ public class SubTask extends Task {
         return status;
     }
 
-    @Override
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setEpicId(int epicId) {
         this.epicId = epicId;

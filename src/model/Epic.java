@@ -1,14 +1,13 @@
 package model;
-import Enum.Status;
 import java.util.ArrayList;
 
 
 public class Epic extends Task {
-    protected ArrayList<Integer> subTaskId = new ArrayList<>();
+    protected ArrayList<Integer> subTaskIds = new ArrayList<>();
 
     public Epic(String title, String description, Status status) {
         super(title, description, status);
-        this.subTaskId = subTaskId;
+        this.subTaskIds = subTaskIds;
     }
 
     public void setStatus(Status status) {
@@ -17,7 +16,7 @@ public class Epic extends Task {
 
     public ArrayList<Integer> getSubTaskId() {
 
-        return subTaskId;
+        return subTaskIds;
     }
 
     @Override

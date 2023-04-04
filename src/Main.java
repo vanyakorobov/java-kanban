@@ -1,15 +1,16 @@
-import core.Manager;
+import core.TaskManager;
 import model.Epic;
-import Enum.Status;
+import model.Status;
 import model.SubTask;
 import model.Task;
 
-// ПАКЕТ ENUM НЕ ПЕРЕИМЕНОВЫВАЕТСЯ - написано "enum is not an identifier"
+// ПАКЕТ ENUM НЕ ПЕРЕИМЕНОВЫВАЕТСЯ - написано "enum is not an identifier". Удалил этот пакет и оставил только класс.
+// в корневую папку перенести не получается - пишет, что из пакета по умолчанию не будет виден этот класс, поэтому перенёс в пакет model
 public class Main {
 
     public static void main(String[] args) {
 
-        Manager manager = new Manager();
+        TaskManager manager = new TaskManager();
         Task task = new Task("Задача", "Описание этой задачи", Status.NEW);
         Epic epic = new Epic("Эпик", "описание этого эпике", Status.NEW);
         SubTask subTask = new SubTask("Подзадача", "описание этой подзадачи", Status.NEW);

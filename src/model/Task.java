@@ -1,5 +1,4 @@
 package model;
-import Enum.Status;
 
 public class Task {
     protected String title;
