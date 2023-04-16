@@ -5,126 +5,96 @@ import model.Task;
 import model.Epic;
 import model.SubTask;
 import java.util.ArrayList;
-import java.util.HashMap;
 
-public class TaskManager {
-    private int newTaskId = 1;
-    private int newEpicId = 1;
-    private int newSubTaskId = 1;
 
-    HashMap<Integer, Task> tasks = new HashMap<>();
-    HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    HashMap<Integer, Epic> epics = new HashMap<>();
+public interface TaskManager {
 
     // набор методов для Task
-    public int createTask(Task task) {
-        task.setId(newTaskId++);
-        tasks.put(task.getId(), task);
+    default int createTask(Task task) {
 
-        return task.getId();
+        return 0;
     }
 
-    public ArrayList<Task> getTasks(){
-        return new ArrayList<>(tasks.values());
-    }
+     default ArrayList<Task> getTasks(){
 
-    public void updateTask(Task task) {
-        tasks.put(task.getId(), task);
-    }
+         return null;
+     }
 
-    public void clearTasks() {
-        tasks.clear();
-    }
-
-    public Task removeTask(int id) {
-        return tasks.remove(id);
+     default void updateTask(Task task) {
 
     }
 
-    public Task getTaskId(int id) {
-        return tasks.get(id);
+     default void clearTasks() {
+
     }
+
+     default Task removeTask(int id) {
+
+
+         return null;
+     }
+
+     default Task getTaskId(int id) {
+
+         return null;
+     }
 
     //набор методов для SubTask
-    public int createSubTask(SubTask subTask) {
-        subTask.setId(newSubTaskId++);
-        subTasks.put(subTask.getId(), subTask);
+    default int createSubTask(SubTask subTask) {
 
-        return subTask.getId();
+        return 0;
     }
 
-    public ArrayList<SubTask> getSubtaskTasks(){
-        return new ArrayList<>(subTasks.values());
+     default ArrayList<SubTask> getSubtaskTasks(){
+
+         return null;
+     }
+
+     default void updateSubTask(SubTask subTask) {
+
     }
 
-    public void updateSubTask(SubTask subTask) {
-        subTasks.put(subTask.getId(), subTask);
+     default void clearSubTasks() {
+
     }
 
-    public void clearSubTasks() {
-        subTasks.clear();
+     default void removeSubTask(SubTask subTask) {
+
     }
 
-    public void removeSubTask(SubTask subTask) {
-        subTasks.remove(subTask.getId());
-    }
+     default Task getSubTaskId(int id) {
 
-    public Task getSubTaskId(int id) {
-        return subTasks.get(id);
-    }
+         return null;
+     }
 
 //набор методов для Epic
-    public int createEpic(Epic epic) {
-        epic.setId(newEpicId++);
-        epics.put(epic.getId(), epic);
+    default int createEpic(Epic epic) {
 
-        return epic.getId();
+        return 0;
     }
 
-    public Status updateEpic(Epic epic, int epicId) {
-        epics.put(epic.getId(), epic);
-        epic = epics.get(epicId);
-            if (epic == null) {
-                return Status.NEW; // если эпик пустой вернуть статус new
-        }
+     default Status updateEpic(Epic epic, int epicId) {
 
-        boolean allDone = true;
-        boolean anyInProgress = false;
+         return null;
+     }
 
-        for (int subTaskId : epic.getSubTaskId()) {
-            SubTask subTask = subTasks.get(subTaskId); // получаем сабтаск по id
-            if (subTask != null && subTask.getStatus() == Status.IN_PROGRESS) {
-                anyInProgress = true; // если хотя бы один сабтаск ин прогресс, то статус эпика будет ин прогресс
-                allDone = false;
-                break;
-            } else if (subTask != null && subTask.getStatus() != Status.DONE) {
-                allDone = false; // если есть сабтаск, который не в статусе done, статус эпика будет new
-            }
-        }
+     default ArrayList<Epic> getEpics(){
 
-            if (allDone) {
-            return Status.DONE; // все сабтаски выполнены, статус эпика done
-            } else if (anyInProgress) {
-            return Status.IN_PROGRESS; // хотя бы один сабтаск в прогрессе, статус эпика ин прогрес
-            } else {
-                return Status.NEW; // еще есть невыполненные сабтаски, статус эпика new
-        }
-    }
+         return null;
+     }
 
-    public ArrayList<Epic> getEpics(){
-        return new ArrayList<>(epics.values());
-    }
-
-    public void clearEpics() {
-        epics.clear();
-    }
-
-    public void removeEpic(Epic epic) {
-        epics.remove(epic.getId());
+     default void clearEpics() {
 
     }
 
-    public Task getSubEpicId(int id) {
-                return epics.get(id);
+     default void removeEpic(Epic epic) {
+
+
     }
+
+     default Task getSubEpicId(int id) {
+
+         return null;
+     }
+
 }

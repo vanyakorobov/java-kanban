@@ -1,16 +1,16 @@
+import core.InMemoryHistoryManager;
+import core.InMemoryTaskManager;
 import core.TaskManager;
 import model.Epic;
 import model.Status;
 import model.SubTask;
 import model.Task;
-
-// ПАКЕТ ENUM НЕ ПЕРЕИМЕНОВЫВАЕТСЯ - написано "enum is not an identifier". Удалил этот пакет и оставил только класс.
-// в корневую папку перенести не получается - пишет, что из пакета по умолчанию не будет виден этот класс, поэтому перенёс в пакет model
 public class Main {
 
     public static void main(String[] args) {
 
-        TaskManager manager = new TaskManager();
+        InMemoryTaskManager manager = new InMemoryTaskManager();
+        InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
         Task task = new Task("Задача", "Описание этой задачи", Status.NEW);
         Epic epic = new Epic("Эпик", "описание этого эпике", Status.NEW);
         SubTask subTask = new SubTask("Подзадача", "описание этой подзадачи", Status.NEW);
@@ -27,16 +27,22 @@ public class Main {
         manager.createSubTask(subTask3);
         manager.createSubTask(subTask4);
         manager.createSubTask(subTask5);
-        manager.updateEpic(epic, 1);
-        System.out.println(epic);
-        System.out.println(task);
-        System.out.println(subTask);
-        System.out.println(subTask1);
-        System.out.println(subTask2);
-        System.out.println(subTask3);
-        System.out.println(subTask4);
-        System.out.println(subTask5);
-        System.out.println(epic);
+        manager.getTaskId(1);
+        manager.getSubTaskId(1);
+        manager.getSubEpicId(1);
+        manager.getTaskId(1);
+        manager.getSubTaskId(1);
+        manager.getSubEpicId(1);
+        manager.getTaskId(1);
+        manager.getSubTaskId(1);
+        manager.getSubEpicId(1);
+        manager.getTaskId(1);
+        manager.getSubTaskId(1);
+        manager.getSubEpicId(1);
+        manager.getTaskId(1);
+        manager.getSubTaskId(1);
+        manager.getSubEpicId(1);
+        manager.getHistory();
     }
 
 }

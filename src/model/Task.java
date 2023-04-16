@@ -36,7 +36,7 @@ public class Task {
                 "title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", id=" + id +
-                ", Status=" + status +
+                ", model.Status=" + status +
                 '}';
     }
 }
