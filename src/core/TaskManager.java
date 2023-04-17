@@ -10,91 +10,43 @@ import java.util.ArrayList;
 public interface TaskManager {
 
     // набор методов для Task
-    default int createTask(Task task) {
+    int createTask(Task task);
 
-        return 0;
-    }
+    ArrayList<Task> getTasks();
 
-     default ArrayList<Task> getTasks(){
+    void updateTask(Task task);
 
-         return null;
-     }
+    void clearTasks();
 
-     default void updateTask(Task task) {
+    Task removeTask(int id);
 
-    }
-
-     default void clearTasks() {
-
-    }
-
-     default Task removeTask(int id) {
-
-
-         return null;
-     }
-
-     default Task getTaskId(int id) {
-
-         return null;
-     }
+    Task getTaskId(int id);
 
     //набор методов для SubTask
-    default int createSubTask(SubTask subTask) {
+    int createSubTask(SubTask subTask);
 
-        return 0;
-    }
+    ArrayList<SubTask> getSubtaskTasks();
 
-     default ArrayList<SubTask> getSubtaskTasks(){
+    void updateSubTask(SubTask subTask);
 
-         return null;
-     }
+    void clearSubTasks();
 
-     default void updateSubTask(SubTask subTask) {
+    void removeSubTask(SubTask subTask);
 
-    }
+    Task getSubTaskId(int id);
 
-     default void clearSubTasks() {
+    //набор методов для Epic
+    int createEpic(Epic epic);
 
-    }
+    Status updateEpic(Epic epic, int epicId);
 
-     default void removeSubTask(SubTask subTask) {
+    ArrayList<Epic> getEpics();
 
-    }
+    void clearEpics();
 
-     default Task getSubTaskId(int id) {
+    void removeEpic(Epic epic);
 
-         return null;
-     }
-
-//набор методов для Epic
-    default int createEpic(Epic epic) {
-
-        return 0;
-    }
-
-     default Status updateEpic(Epic epic, int epicId) {
-
-         return null;
-     }
-
-     default ArrayList<Epic> getEpics(){
-
-         return null;
-     }
-
-     default void clearEpics() {
-
-    }
-
-     default void removeEpic(Epic epic) {
-
-
-    }
-
-     default Task getSubEpicId(int id) {
-
-         return null;
-     }
+    Task getSubEpicId(int id);
+    ArrayList<Task> getHistory();
 
 }

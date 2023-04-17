@@ -6,13 +6,8 @@ import java.util.ArrayList;
 
 public interface HistoryManager {
 
-   default void add(Task task) {
+    void add(Task task);
 
-   }
-
-    default ArrayList<Task> getHistory() {
-
-        return null;
-    }
+    ArrayList<Task> getHistory();
 
 }

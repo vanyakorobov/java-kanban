@@ -7,15 +7,17 @@ import model.SubTask;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class InMemoryTaskManager extends InMemoryHistoryManager implements TaskManager {
+public class InMemoryTaskManager implements TaskManager {
 
     private int newTaskId = 1;
     private int newEpicId = 1;
     private int newSubTaskId = 1;
 
-    HashMap<Integer, Task> tasks = new HashMap<>();
-    HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    HashMap<Integer, Epic> epics = new HashMap<>();
+    private final HashMap<Integer, Task> tasks = new HashMap<>();
+    private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
+    private final HashMap<Integer, Epic> epics = new HashMap<>();
+    InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
+    ArrayList<Task> newHistory = inMemoryHistoryManager.history;
 
     // набор методов для Task
     @Override
@@ -49,10 +51,10 @@ public class InMemoryTaskManager extends InMemoryHistoryManager implements TaskM
 
     @Override
     public Task getTaskId(int id) {
-        if (history.size() == 10) {
-            history.remove(0);
+        if (newHistory.size() == 10) {
+            newHistory.remove(0);
         }
-        add(tasks.get(id));
+        inMemoryHistoryManager.add(tasks.get(id));
         return tasks.get(id);
     }
 
@@ -88,10 +90,10 @@ public class InMemoryTaskManager extends InMemoryHistoryManager implements TaskM
 
     @Override
     public Task getSubTaskId(int id) {
-        if (history.size() == 10) {
-            history.remove(0);
+        if (newHistory.size() == 10) {
+            newHistory.remove(0);
         }
-        add(subTasks.get(id));
+        inMemoryHistoryManager.add(subTasks.get(id));
 
         return subTasks.get(id);
     }
@@ -154,11 +156,16 @@ public class InMemoryTaskManager extends InMemoryHistoryManager implements TaskM
 
     @Override
     public Task getSubEpicId(int id) {
-        if (history.size() == 10) {
-            history.remove(0);
+        if (newHistory.size() == 10) {
+            newHistory.remove(0);
         }
-        add(epics.get(id));
+        inMemoryHistoryManager.add(epics.get(id));
         return epics.get(id);
     }
-}
 
+    @Override
+    public ArrayList<Task> getHistory() {
+        System.out.println("ИСТОРИЯ: " + newHistory);
+        return newHistory;
+    }
+}
