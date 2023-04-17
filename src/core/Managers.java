@@ -13,12 +13,7 @@ public class Managers {
     public static TaskManager getDefault() {
         // здесь должна быть реализация, которая возвращает нужный объект-менеджер
 
-        return new DefaultTaskManager() {
-            @Override
-            public ArrayList<Task> getHistory() {
-                return null;
-            }
-        };
+        return new InMemoryTaskManager();
     }
 
     public static HistoryManager getDefaultHistory(){
