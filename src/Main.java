@@ -1,4 +1,3 @@
-import core.InMemoryHistoryManager;
 import core.InMemoryTaskManager;
 import model.Epic;
 import model.Status;
@@ -9,7 +8,6 @@ public class Main {
     public static void main(String[] args) {
 
         InMemoryTaskManager manager = new InMemoryTaskManager();
-        InMemoryHistoryManager inMemoryHistoryManager = new InMemoryHistoryManager();
         Task task = new Task("Задача", "Описание этой задачи", Status.NEW);
         Epic epic = new Epic("Эпик", "описание этого эпике", Status.NEW);
         SubTask subTask = new SubTask("Подзадача", "описание этой подзадачи", Status.NEW);
@@ -43,5 +41,4 @@ public class Main {
         manager.getSubEpicId(1);
         manager.getHistory();
     }
-
 }
