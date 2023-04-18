@@ -16,7 +16,7 @@ public class InMemoryTaskManager implements TaskManager {
     private final HashMap<Integer, Task> tasks = new HashMap<>();
     private final HashMap<Integer, SubTask> subTasks = new HashMap<>();
     private final HashMap<Integer, Epic> epics = new HashMap<>();
-    HistoryManager inMemoryHistoryManager = Managers.getDefaultHistory();
+    HistoryManager historyManager = Managers.getDefaultHistory();
     // набор методов для Task
     @Override
     public int createTask(Task task) {
@@ -49,10 +49,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getTaskId(int id) {
-        if (inMemoryHistoryManager.history.size() == 10) {
-            inMemoryHistoryManager.history.remove(0);
+        if (historyManager.history.size() == 10) {
+            historyManager.history.remove(0);
         }
-        inMemoryHistoryManager.add(tasks.get(id));
+        historyManager.add(tasks.get(id));
         return tasks.get(id);
     }
 
@@ -88,10 +88,10 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getSubTaskId(int id) {
-        if (inMemoryHistoryManager.history.size() == 10) {
-            inMemoryHistoryManager.history.remove(0);
+        if (historyManager.history.size() == 10) {
+            historyManager.history.remove(0);
         }
-        inMemoryHistoryManager.add(subTasks.get(id));
+        historyManager.add(subTasks.get(id));
 
         return subTasks.get(id);
     }
@@ -154,16 +154,16 @@ public class InMemoryTaskManager implements TaskManager {
 
     @Override
     public Task getSubEpicId(int id) {
-        if (inMemoryHistoryManager.history.size() == 10) {
-            inMemoryHistoryManager.history.remove(0);
+        if (historyManager.history.size() == 10) {
+            historyManager.history.remove(0);
         }
-        inMemoryHistoryManager.add(epics.get(id));
+        historyManager.add(epics.get(id));
         return epics.get(id);
     }
 
     @Override
     public ArrayList<Task> getHistory() {
-        System.out.println("ИСТОРИЯ: " + inMemoryHistoryManager.history);
-        return inMemoryHistoryManager.history;
+        System.out.println("ИСТОРИЯ: " + historyManager.history);
+        return historyManager.history;
     }
 }
