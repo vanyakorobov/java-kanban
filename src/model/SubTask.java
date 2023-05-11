@@ -8,16 +8,6 @@ public class SubTask extends Task {
         this.status = status;
     }
 
-    public Status getStatus() {
-        return status;
-    }
-
-
-
-    public void setEpicId(int epicId) {
-        this.epicId = epicId;
-    }
-
     public int getEpicId() {
         return epicId;
     }

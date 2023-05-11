@@ -7,16 +7,14 @@ public class Epic extends Task {
 
     public Epic(String title, String description, Status status) {
         super(title, description, status);
-        this.subTaskIds = subTaskIds;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
     }
 
     public ArrayList<Integer> getSubTaskId() {
-
         return subTaskIds;
+    }
+
+    public void setSubTaskId(ArrayList<Integer> subTaskId) {
+        this.subTaskIds = subTaskId;
     }
 
     @Override

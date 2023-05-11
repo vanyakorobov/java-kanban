@@ -1,16 +1,14 @@
 package core;
 
-public class Managers {
 
-    public static TaskManager getDefault() {
-        // здесь должна быть реализация, которая возвращает нужный объект-менеджер
+    public class Managers {
 
-        return new InMemoryTaskManager();
+        public static TaskManager getDefault() {
+            return new InMemoryTaskManager();
+        }
+
+        public static HistoryManager getDefaultHistory() {
+            return new InMemoryHistoryManager();
+        }
     }
-
-    public static HistoryManager getDefaultHistory() {
-
-        return new InMemoryHistoryManager();
-    }
-}
 

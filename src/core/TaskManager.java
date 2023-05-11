@@ -5,48 +5,56 @@ import model.Task;
 import model.Epic;
 import model.SubTask;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public interface TaskManager {
+    // Метод создания задачи
+     int createTask(Task task);
 
-    // набор методов для Task
-    int createTask(Task task);
+    // Метод обновления задачи
+     void updateTask(Task task);
 
-    ArrayList<Task> getTasks();
+    // Метод очистки списка задач
+     void clearTasks();
 
-    void updateTask(Task task);
+    // Метод удаления задачи
+     void removeTask(int id);
 
-    void clearTasks();
+    // Метод получения задачи по идентификатору
+     Task getTask(int id);
 
-    Task removeTask(int id);
+    // Метод создания блока задач
+     int createEpic(Epic epic);
 
-    Task getTaskId(int id);
+    // Метод обновления блока задач
+     void updateEpic(Epic epic);
 
-    //набор методов для SubTask
-    int createSubTask(SubTask subTask);
+    // Метод получения блока задач по идентификатору
+     Epic getEpic(int id);
 
-    ArrayList<SubTask> getSubtaskTasks();
+    // Метод очистки списка блоков задач
+     void clearEpics();
 
-    void updateSubTask(SubTask subTask);
+    // Метод удаления блока задач
+     void removeEpic(int id);
 
-    void clearSubTasks();
+    // Метод создания подзадачи
+     int createSubTask(SubTask subTask);
 
-    void removeSubTask(SubTask subTask);
+    // Метод обновления подзадачи
+     void updateSubTask(SubTask subTask);
 
-    Task getSubTaskId(int id);
+    // Метод получения подзадачи по идентификатору
+     SubTask getSubTask(int id);
 
-    //набор методов для Epic
-    int createEpic(Epic epic);
+    // Метод очистки списка подзадач блока задач
+     void clearSubTasks();
 
-    Status updateEpic(Epic epic, int epicId);
+    // Метод удаления подзадачи
+    void removeSubs(int id);
 
-    ArrayList<Epic> getEpics();
-
-    void clearEpics();
-
-    void removeEpic(Epic epic);
-
-    Task getSubEpicId(int id);
-    ArrayList<Task> getHistory();
+    // Метод получения списка истории задач
+     List<Task> getHistory();
 
 }

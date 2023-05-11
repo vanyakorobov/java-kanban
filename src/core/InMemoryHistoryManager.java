@@ -3,17 +3,23 @@ package core;
 import model.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
-
+    private List<Task> history = new ArrayList<>();
 
     @Override
     public void add(Task task) {
+
+        if (history.size() == 10) {
+            history.remove(0);
+        }
+
         history.add(task);
     }
+
     @Override
-    public ArrayList<Task> getHistory() {
-        System.out.println("ИСТОРИЯ: " + history);
+    public List<Task> getHistory() { // Просмотр истории
         return history;
     }
 
