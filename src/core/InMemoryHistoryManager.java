@@ -18,11 +18,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         }
         Node<Task> newNode = history.addNode(task);
         historyMap.put(task.getId(), newNode);
-        if (history.getSize() > MAX_SIZE) {
-            Task removed = history.getHead().data;
-            history.removeNode(history.getHead());
-            historyMap.remove(removed.getId());
-        }
     }
 
     @Override
