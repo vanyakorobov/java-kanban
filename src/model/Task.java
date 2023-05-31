@@ -5,6 +5,7 @@ public class Task {
     protected String description;
     protected int id;
     protected Status status;
+    protected TypeOfTasks type = TypeOfTasks.TASK;
 
 
 
@@ -12,7 +13,6 @@ public class Task {
         this.title = title;
         this.description = description;
         this.status = status;
-
     }
 
     public Status getStatus() {
@@ -41,11 +41,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status='" + status + '\'' +
-                '}';
+        return id + "," +
+                type + "," +
+                title + "," +
+                status + "," +
+                description;
     }
 }

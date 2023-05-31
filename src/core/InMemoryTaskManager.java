@@ -4,17 +4,16 @@ import model.Status;
 import model.Task;
 import model.Epic;
 import model.SubTask;
-
 import java.util.HashMap;
 import java.util.List;
 
 public class InMemoryTaskManager implements TaskManager { // Класс InMemoryTaskManager отвечает за реализацию методов,
     // для создания задач
-    private int id = 1;
-    private HashMap<Integer, Task> tasks = new HashMap<>(); // Хранение данных задач
-    private HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    private HashMap<Integer, Epic> epics = new HashMap<>();
-    private HistoryManager historyManager = Managers.getDefaultHistory();
+    protected int id = 1;
+    protected HashMap<Integer, Task> tasks = new HashMap<>(); // Хранение данных задач
+    protected HashMap<Integer, SubTask> subTasks = new HashMap<>();
+    protected HashMap<Integer, Epic> epics = new HashMap<>();
+    protected HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Override
     public int createTask(Task task) { // Создание задачи
@@ -50,7 +49,7 @@ public class InMemoryTaskManager implements TaskManager { // Класс InMemory
         epic.setId(id++);
 
         epics.put(epic.getId(), epic);
-
+        System.out.println(epics.keySet());
         return epic.getId();
     }
 
@@ -131,7 +130,7 @@ public class InMemoryTaskManager implements TaskManager { // Класс InMemory
         statusCreator(subTask);
     }
 
-    private void statusCreator(SubTask subTask) {
+    protected void statusCreator(SubTask subTask) {
         int epicId = subTask.getEpicId();
         Epic epic = epics.get(epicId);
 

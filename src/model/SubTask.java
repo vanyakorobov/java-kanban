@@ -2,6 +2,7 @@ package model;
 
 public class SubTask extends Task {
     private int epicId;
+    protected TypeOfTasks type = TypeOfTasks.SUBTASK;
 
     public SubTask(String title, String description, Status status, int epicId) {
         super(title, description, status);
@@ -14,11 +15,11 @@ public class SubTask extends Task {
 
     @Override
     public String toString() {
-        return "SubTask{" +
-                "title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", id=" + id +
-                ", status='" + status + '\'' +
-                '}';
+        return id + "," +
+                type + "," +
+                title + "," +
+                status + "," +
+                description + "," +
+                epicId;
     }
 }
