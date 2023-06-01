@@ -9,9 +9,13 @@ import java.util.Map;
 
 public class InMemoryHistoryManager implements HistoryManager{
     protected CustomLinkedList<Task> history = new CustomLinkedList<>();
-    public Map<Integer, Node<Task>> historyMap = new HashMap<>();
+    protected Map<Integer, Node<Task>> historyMap = new HashMap<>();
     private static final int MAX_SIZE = 10;
 
+    @Override
+    public  Map<Integer, Node<Task>> getHistoryMap(){
+        return historyMap;
+    }
     @Override
     public void add(Task task) {
         Node<Task> node = historyMap.get(task.getId());

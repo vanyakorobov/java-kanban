@@ -7,6 +7,8 @@ import java.util.List;
 
 
 public interface TaskManager {
+    HistoryManager getHistoryManager();
+
     // Метод создания задачи
      int createTask(Task task);
 

@@ -5,14 +5,15 @@ public class Task {
     protected String description;
     protected int id;
     protected Status status;
-    protected TypeOfTasks type = TypeOfTasks.TASK;
+    protected TypeOfTasks type;
 
 
 
-    public Task(String title, String description, Status status) {
+    public Task(String title, String description, Status status, TypeOfTasks type) {
         this.title = title;
         this.description = description;
         this.status = status;
+        this.type = type;
     }
 
     public Status getStatus() {

@@ -2,10 +2,10 @@ package model;
 
 public class SubTask extends Task {
     private int epicId;
-    protected TypeOfTasks type = TypeOfTasks.SUBTASK;
+    protected TypeOfTasks type;
 
-    public SubTask(String title, String description, Status status, int epicId) {
-        super(title, description, status);
+    public SubTask(String title, String description, Status status, int epicId, TypeOfTasks type) {
+        super(title, description, status, type);
         this.epicId = epicId;
     }
 
