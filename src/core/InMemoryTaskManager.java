@@ -10,9 +10,9 @@ import java.util.List;
 public class InMemoryTaskManager implements TaskManager { // Класс InMemoryTaskManager отвечает за реализацию методов,
     // для создания задач
     protected int id = 1;
-    protected HashMap<Integer, Task> tasks = new HashMap<>(); // Хранение данных задач
-    protected HashMap<Integer, SubTask> subTasks = new HashMap<>();
-    protected HashMap<Integer, Epic> epics = new HashMap<>();
+    protected static HashMap<Integer, Task> tasks = new HashMap<>(); // Хранение данных задач
+    protected static HashMap<Integer, SubTask> subTasks = new HashMap<>();
+    protected static HashMap<Integer, Epic> epics = new HashMap<>();
     protected HistoryManager historyManager = Managers.getDefaultHistory();
 
     @Override
