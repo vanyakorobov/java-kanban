@@ -2,59 +2,60 @@ package core;
 
 import model.Task;
 import model.Epic;
-import model.SubTask;
+import model.Subtask;
 import java.util.List;
 
 
 public interface TaskManager {
-    HistoryManager getHistoryManager();
+    List<Task> getHistory();
 
-    // Метод создания задачи
-     int createTask(Task task);
+    void remove(int id);
 
-    // Метод обновления задачи
-     void updateTask(Task task);
+    Task createTask(Task task);
 
-    // Метод очистки списка задач
-     void clearTasks();
+    Epic createEpic(Epic epic);
 
-    // Метод удаления задачи
-     void removeTask(int id);
+    Subtask createSubtask(Subtask subtask);
 
-    // Метод получения задачи по идентификатору
-     Task getTask(int id);
+    void deleteTaskById(int id);
 
-    // Метод создания блока задач
-     int createEpic(Epic epic);
+    void deleteEpicById(int id);
 
-    // Метод обновления блока задач
-     void updateEpic(Epic epic);
+    void deleteSubtaskById(int id);
 
-    // Метод получения блока задач по идентификатору
-     Epic getEpic(int id);
+    void deleteAllTasks();
 
-    // Метод очистки списка блоков задач
-     void clearEpics();
+    void deleteAllEpics();
 
-    // Метод удаления блока задач
-     void removeEpic(int id);
+    void deleteAllSubtasks();
 
-    // Метод создания подзадачи
-     int createSubTask(SubTask subTask);
+    void deleteAllSubtasksByEpic(Epic epic);
 
-    // Метод обновления подзадачи
-     void updateSubTask(SubTask subTask);
+    Task getTaskById(int id);
 
-    // Метод получения подзадачи по идентификатору
-     SubTask getSubTask(int id);
+    Epic getEpicById(int id);
 
-    // Метод очистки списка подзадач блока задач
-     void clearSubTasks();
+    Subtask getSubtaskById(int id);
 
-    // Метод удаления подзадачи
-    void removeSubs(int id);
+    List<Task> getAllTasks();
 
-    // Метод получения списка истории задач
-     List<Task> getHistory();
+    List<Epic> getAllEpics();
 
+    List<Subtask> getAllSubtasks();
+
+    List<Subtask> getAllSubtasksByEpicId(int id);
+
+    void updateTask(Task task);
+
+    void updateEpic(Epic epic);
+
+    void updateStatusEpic(Epic epic);
+
+    void updateSubtask(Subtask subtask);
+
+    void printTasks();
+
+    void printEpics();
+
+    void printSubtasks();
 }

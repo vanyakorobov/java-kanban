@@ -1,96 +1,123 @@
 package core;
 
 import model.Task;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
+import java.util.*;
 
-public class InMemoryHistoryManager implements HistoryManager{
-    protected CustomLinkedList<Task> history = new CustomLinkedList<>();
-    protected Map<Integer, Node<Task>> historyMap = new HashMap<>();
-    private static final int MAX_SIZE = 10;
+public class InMemoryHistoryManager implements HistoryManager {
+    private static class CustomLinkedList {
+        private final Map<Integer, Node> table = new HashMap<>();
+        private Node head;
+        private Node tail;
 
-    @Override
-    public  Map<Integer, Node<Task>> getHistoryMap(){
-        return historyMap;
-    }
-    @Override
-    public void add(Task task) {
-        Node<Task> node = historyMap.get(task.getId());
-        if (node != null) {
-            history.removeNode(node);
-        }
-        history.linkLast(task);
-        historyMap.put(task.getId(), history.tail);
-        if (history.size > MAX_SIZE) {
-            Task removed = history.head.data;
-            history.removeNode(history.head);
-            historyMap.remove(removed.getId());
-        }
-    }
+        private void linkLast(Task task) {
+            Node element = new Node();
+            element.setTask(task);
 
-    @Override
-    public void remove(int id) {
-        Node<Task> node = historyMap.get(id);
-        if (node != null) {
-            history.removeNode(node);
-            historyMap.remove(id);
-        }
-    }
-
-    @Override
-    public List<Task> getHistory() {
-        return history.getTasks();
-    }
-
-    private class CustomLinkedList<T> { // Этот класс отвечает за связный лист, который используется для сохранения истории
-        // просмотров, проходила по нему, и удаляла повторяющиеся элементы.
-        private Node<T> head;
-        private Node<T> tail;
-        private int size = 0; // я согласен, что метод getSize нигде нее используется, но переменная size учавствует в
-        // алгоритме добавления и удаления узлов.
-
-        public void linkLast(T data) {
-            Node<T> newNode = new Node<>(data);
-            if (head == null) {
-                head = newNode;
-                tail = newNode;
-            } else {
-                tail.next = newNode;
-                newNode.prev = tail;
-                tail = newNode;
+            if (table.containsKey(task.getId())) {
+                removeNode(table.get(task.getId()));
             }
-            size++;
+
+            if (head == null) {
+                tail = element;
+                head = element;
+                element.setNext(null);
+                element.setPrev(null);
+            } else {
+                element.setPrev(tail);
+                element.setNext(null);
+                tail.setNext(element);
+                tail = element;
+            }
+
+            table.put(task.getId(), element);
         }
 
-        public List<T> getTasks() {
-            List<T> result = new ArrayList<>();
-            Node<T> current = head;
-            while (current != null) {
-                result.add(current.data);
-                current = current.next;
+        private List<Task> getTasks() {
+            List<Task> result = new ArrayList<>();
+            Node element = head;
+            while (element != null) {
+                result.add(element.getTask());
+                element = element.getNext();
             }
             return result;
         }
 
-        public void removeNode(Node<T> node) {
-            if (node == null) {
-                return;
+        private void removeNode(Node node) {
+            if (node != null) {
+                table.remove(node.getTask().getId());
+                Node prev = node.getPrev();
+                Node next = node.getNext();
+
+                if (head == node) {
+                    head = node.getNext();
+                }
+                if (tail == node) {
+                    tail = node.getPrev();
+                }
+
+                if (prev != null) {
+                    prev.setNext(next);
+                }
+
+                if (next != null) {
+                    next.setPrev(prev);
+                }
             }
-            if (node.prev == null) {
-                head = node.next;
-            } else {
-                node.prev.next = node.next;
-            }
-            if (node.next == null) {
-                tail = node.prev;
-            } else {
-                node.next.prev = node.prev;
-            }
-            size--;
         }
 
+        private Node getNode(int id) {
+            return table.get(id);
+        }
+    }
+
+    private final CustomLinkedList list = new CustomLinkedList();
+
+    // Добавление нового просмотра задачи в историю
+    @Override
+    public void add(Task task) {
+        list.linkLast(task);
+    }
+
+    // Удаление просмотра из истории
+    @Override
+    public void remove(int id) {
+        list.removeNode(list.getNode(id));
+    }
+
+    // Получение истории просмотров
+    @Override
+    public List<Task> getHistory() {
+        return list.getTasks();
+    }
+}
+
+class Node {
+    private Task task;
+    private Node prev;
+    private Node next;
+
+    public Node getNext() {
+        return next;
+    }
+
+    public Node getPrev() {
+        return prev;
+    }
+
+    public Task getTask() {
+        return task;
+    }
+
+    public void setNext(Node next) {
+        this.next = next;
+    }
+
+    public void setPrev(Node prev) {
+        this.prev = prev;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
     }
 }
