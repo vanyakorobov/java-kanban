@@ -411,12 +411,20 @@ public class InMemoryTaskManager implements TaskManager {
 
         for (int i = 1; i < tasks.size(); i++) {
             Task task = tasks.get(i);
+            Task prevTask = tasks.get(i - 1);
 
+            // Проверяем, есть ли пересечения во времени выполнения задачи с приоритетом
+            // с предыдущей задачей
             boolean taskHasIntersections = checkTime(task);
 
             if (taskHasIntersections) {
-                throw new ManagerValidateException(
-                        "Задачи #" + task.getId() + " и #" + tasks.get(i - 1) + "пересекаются");
+                // Проверяем, является ли задача полностью вложенной в предыдущую задачу
+                if (task.getStartTime().isAfter(prevTask.getStartTime())
+                        && task.getEndTime().isBefore(prevTask.getEndTime())) {
+                    // Если задача вложена, то выбрасываем исключение
+                        throw new ManagerValidateException(
+                                "Задачи #" + task.getId() + " и #" + prevTask.getId() + "пересекаются");
+                }
             }
         }
     }

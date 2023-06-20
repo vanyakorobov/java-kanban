@@ -2,17 +2,20 @@ package Tests;
 
 import core.HistoryManager;
 import core.InMemoryHistoryManager;
+import core.InMemoryTaskManager;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import model.Status;
 import model.Task;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InMemoryHistoryManagerTest {
     HistoryManager manager;
+    InMemoryTaskManager inMemoryTaskManager;
     private int id = 0;
 
     // объявление класса, содержащего методы тестирования и наследующего абстрактный класс TaskManagerTest
@@ -126,5 +129,20 @@ class InMemoryHistoryManagerTest {
         manager.remove(0);
         // сравнение полученных значений с ожидаемыми
         assertEquals(List.of(task), manager.getHistory());
+    }
+
+    @Test
+    public void getHistoryTest() {
+        Task task1 = new Task("Finish report", "Report", Status.IN_PROGRESS, Instant.now(), 360);
+        Task task2 = new Task("Finish report", "Report", Status.IN_PROGRESS, Instant.now(), 360);
+        Task task3 = new Task("Finish report", "Report", Status.IN_PROGRESS, Instant.now(), 360);
+        Task task4 = new Task("Finish report", "Report", Status.IN_PROGRESS, Instant.now(), 360);
+        Task task5 = new Task("Finish report", "Report", Status.IN_PROGRESS, Instant.now(), 360);
+        inMemoryTaskManager.getTaskById(1);
+        inMemoryTaskManager.getTaskById(2);
+        inMemoryTaskManager.getTaskById(3);
+        inMemoryTaskManager.getTaskById(4);
+        inMemoryTaskManager.getTaskById(5);
+        assertEquals(List.of(1, 2, 3, 4, 5), manager.getHistory());
     }
 }
