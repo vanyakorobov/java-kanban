@@ -417,7 +417,7 @@ public class InMemoryTaskManager implements TaskManager {
             // с предыдущей задачей
             boolean taskHasIntersections = checkTime(task);
 
-            if (taskHasIntersections) {
+            if (!taskHasIntersections) {
                 // Проверяем, является ли задача полностью вложенной в предыдущую задачу
                 if (task.getStartTime().isAfter(prevTask.getStartTime())
                         && task.getEndTime().isBefore(prevTask.getEndTime())) {
