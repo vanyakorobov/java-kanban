@@ -59,6 +59,9 @@ public class KVServer {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+        finally {
+            httpExchange.close();
+        }
     }
 
     private void save(HttpExchange httpExchange) throws IOException {
